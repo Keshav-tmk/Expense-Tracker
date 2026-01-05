@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Smart Finance Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/abcd.css">
+    
+</head>
+<body>
+    <!-- Auth Page -->
+    <div id="authPage" class="auth-container">
+        <div class="auth-box">
+            <h1>💰 Expense Tracker</h1>
+            <p>Manage your finances smartly</p>
+            
+            <form id="authForm">
+                <div class="form-group" id="nameGroup" style="display: none;">
+                    <label>Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+                
+                <button type="submit" class="btn" id="authBtn">Login</button>
+            </form>
+            
+            <div class="toggle-auth">
+                <span id="authToggleText">Don't have an account?</span>
+                <a href="#" id="authToggle">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard">
+        <div class="container">
+            <header>
+                <h1>💰 Expense Tracker</h1>
+                <div class="user-info">
+                    <span id="userName">Welcome</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Expenses</h3>
+                    <div class="amount" id="totalExpenses">₹0.00</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Transactions</h3>
+                    <div class="amount" id="totalTransactions">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Average per Transaction</h3>
+                    <div class="amount" id="avgTransaction">₹0.00</div>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="card">
+                    <h2>Add New Expense</h2>
+                    <form id="expenseForm">
+                        <div class="form-group">
+                            <label>Amount (₹)</label>
+                            <input type="number" id="amount" step="0.01" placeholder="0.00" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="category">
+                                <option>Food</option>
+                                <option>Transport</option>
+                                <option>Shopping</option>
+                                <option>Bills</option>
+                                <option>Entertainment</option>
+                                <option>Health</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" id="description" placeholder="What did you spend on?" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Bill Photo (Optional)</label>
+                            <div class="file-upload">
+                                <div class="file-upload-btn">📤 Upload Photo</div>
+                                <input type="file" id="billPhoto" accept="image/*">
+                            </div>
+                            <div id="photoPreview"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn">Add Expense</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    
+                   <div class="align"><h2>Recent Expenses</h2>
+                   <button class="summary-btn" onclick="exportPDF()">Export PDF</button>
+</div>
+                   
+                    <div class="expense-list" id="expenseList"></div>
+                    
+                </div>
+                
+            </div>
+
+            <div class="chart-container">
+                <h2>Spending by Category</h2>
+                <canvas id="categoryChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <h2>Monthly Spending Trend</h2>
+                <canvas id="monthlyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot -->
+    <div class="chatbot-toggle" onclick="toggleChatbot()">💬</div>
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <h3>AI Financial Assistant</h3>
+            <span style="cursor: pointer;" onclick="toggleChatbot()">✕</span>
+        </div>
+        <div class="chatbot-messages" id="chatMessages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Ask me about your finances...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+<script src="/abcd.js"></script>
+
+</body>
+</html>
